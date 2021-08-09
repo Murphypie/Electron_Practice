@@ -72,5 +72,6 @@
   },
   "include":[
     "client",
+    "electron",
   ]
 }

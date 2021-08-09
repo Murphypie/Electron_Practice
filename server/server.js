@@ -8,13 +8,22 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+app.use('/snipping', (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
+});
+
+
 app.get('/', (req, res) => {
   return res
     .status(200)
     .sendFile(path.resolve(__dirname, '../index.html'));
 });
 
-// Set static folder - static: fiiles that the webserver (express) reads from the file systen and sends, unmoidified, to the client
+// serve static from client for CSS files
+app.use("/client", express.static(path.join(__dirname, "../client")))
+
+// Set static folder - static: files that the webserver (express) reads from the file systen and sends, unmodified, to the client
 app.use("/build", express.static(path.join(__dirname, "../build")));
 
 // GLOBAL ERROR Handler

@@ -2,24 +2,35 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const isDev = require('electron-is-dev')
+const electronReload = require('electron-reload')
 
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1280,
+    height: 1024,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
+      preload: path.join(__dirname, '/preload.ts'),   
+
+      nodeIntegration: true, //Electron applications can display remote websites. 
+      //This gives a remote web page access to your local resources and potentially allows them to perform malicious activities.
+      //That's why nodeIntegration is disabled. For fully offline applications, we need to enable Node.js support explicitly
+
+      enableRemoteModule: true,
+      contextIsolation: false,
+    },
+    frame: false, // For snipping tools you don't want a frame
+    transparent: true,
+    //titleBarStyle: 'hidden'
   })
 
   // and load the index.html of the app.
   mainWindow.loadURL(
-    isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../build/index.html")}`
+    isDev ? "http://localhost:3000" : `file://${path.join(__dirname, "../index.html")}`
   )
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 }
 
 // This method will be called when Electron has finished

@@ -5,11 +5,13 @@
   "main": "electron/electron.ts",
   "homepage": "./",
   "scripts": {
-    "start": "cross-env NODE_ENV=production nodemon server/server.js",
+    "start": "cross-env NODE_ENV=production node server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --hot --open\" \"nodemon server/server.js\"",
+    "watch": "webpack --config webpack.config.js --watch",
     "electron-builder": "electron-builder",
     "electron-build": "npm run build && npm run electron-builder",
+    "electron-barestart": "electron .",
     "electron-start": "concurrently \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "author": "",
@@ -46,6 +48,7 @@
     "dotenv": "^10.0.0",
     "electron": "^13.1.8",
     "electron-builder": "^22.11.7",
+    "electron-reload": "^2.0.0-alpha.1",
     "eslint": "^7.32.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.24.0",

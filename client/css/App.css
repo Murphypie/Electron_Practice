@@ -1,0 +1,8 @@
+.topframe{
+  position: relative;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+.topframe > span{
+  color:transparent;
+}
